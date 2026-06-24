@@ -100,16 +100,16 @@ function Index() {
               <a
                 key={l.label}
                 href={l.href}
-                className="bg-card-gradient group flex items-center gap-4 rounded-2xl border border-crimson/20 px-5 py-4 backdrop-blur-md shadow-card-elegant transition-all hover:scale-[1.02] hover:border-crimson/60 hover:bg-card"
+                className="bg-button-gradient group relative flex items-center gap-4 overflow-hidden rounded-2xl px-5 py-4 shadow-button-elegant transition-all hover:scale-[1.02] hover:shadow-glow"
               >
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-crimson/15 text-crimson transition-colors group-hover:bg-crimson/30">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/10 text-crimson backdrop-blur-sm">
                   <Icon className="h-5 w-5" />
                 </div>
                 <div className="flex-1 text-left">
-                  <div className="text-sm font-medium text-foreground">{l.label}</div>
-                  {l.sub && <div className="text-xs text-muted-foreground">{l.sub}</div>}
+                  <div className="text-sm font-semibold text-foreground">{l.label}</div>
+                  {l.sub && <div className="text-xs text-foreground/70">{l.sub}</div>}
                 </div>
-                <span className="text-muted-foreground transition-transform group-hover:translate-x-1">→</span>
+                <span className="text-foreground/80 transition-transform group-hover:translate-x-1">→</span>
               </a>
             );
           })}
