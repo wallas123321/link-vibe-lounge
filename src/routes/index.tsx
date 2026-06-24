@@ -1,14 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Heart, Instagram, MessageCircle, Sparkles, Crown, Star, Mail, Camera, Gift } from "lucide-react";
-import heroAvatar from "@/assets/hero-avatar.jpg";
+import { Heart, Sparkles, Crown, Flame } from "lucide-react";
+import heroAvatar from "@/assets/casal.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Lust & Co. — Seus desejos em um só lugar" },
-      { name: "description", content: "Acesse todos os meus links exclusivos. Conteúdo adulto, sensual e picante para maiores de 18 anos." },
-      { property: "og:title", content: "Lust & Co. — Seus desejos em um só lugar" },
-      { property: "og:description", content: "Acesse todos os meus links exclusivos. Conteúdo adulto e picante." },
+      { title: "Casal Novinho Maringá" },
+      { name: "description", content: "Casados, liberais, só saímos juntos. Confira nossos conteúdos exclusivos no botão abaixo." },
+      { property: "og:title", content: "Casal Novinho Maringá" },
+      { property: "og:description", content: "Casados, liberais, só saímos juntos. Confira nossos conteúdos exclusivos no botão abaixo." },
     ],
   }),
   component: Index,
@@ -23,66 +23,52 @@ type LinkItem = {
 };
 
 const links: LinkItem[] = [
-  { label: "Conteúdo VIP Exclusivo", sub: "Acesso completo • +18", href: "#", icon: Crown, featured: true },
-  { label: "Pack Personalizado", sub: "Só pra você, do meu jeito", href: "#", icon: Gift },
-  { label: "Chat Privado", sub: "Vamos conversar a sós", href: "#", icon: MessageCircle },
-  { label: "Galeria Sensual", sub: "Ensaios e bastidores", href: "#", icon: Camera },
-  { label: "Instagram", sub: "@seuperfil", href: "#", icon: Instagram },
-  { label: "Lista de Desejos", sub: "Me presenteie", href: "#", icon: Heart },
-  { label: "Agendar Encontro", sub: "Disponibilidade limitada", href: "#", icon: Star },
-  { label: "Contato Direto", sub: "Negócios & parcerias", href: "#", icon: Mail },
+  { label: "Conteúdo VIP Exclusivo", sub: "Acesso completo", href: "#", icon: Crown, featured: true },
+  { label: "Maringá Hot", sub: "Nosso grupo", href: "#", icon: Flame },
 ];
 
 function Index() {
   return (
     <main className="bg-hero relative min-h-screen overflow-hidden">
-      {/* Smoky glow accents */}
       <div className="pointer-events-none absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-crimson/30 blur-[120px] animate-smoke" />
       <div className="pointer-events-none absolute -bottom-40 -right-40 h-[500px] w-[500px] rounded-full bg-rose/20 blur-[140px] animate-smoke" style={{ animationDelay: "2s" }} />
 
       <div className="relative mx-auto flex min-h-screen max-w-md flex-col items-center px-5 py-12">
-        {/* +18 badge */}
         <div className="mb-8 flex items-center gap-2 rounded-full border border-crimson/40 bg-background/40 px-4 py-1.5 backdrop-blur-md">
           <Sparkles className="h-3.5 w-3.5 text-crimson" />
           <span className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
-            Conteúdo Adulto • +18
+            Somente +18
           </span>
         </div>
 
-        {/* Avatar */}
         <div className="relative mb-6">
           <div className="absolute inset-0 rounded-full bg-crimson/40 blur-2xl animate-pulse-glow" />
           <div className="relative h-36 w-36 overflow-hidden rounded-full ring-2 ring-crimson/60 ring-offset-4 ring-offset-background shadow-glow">
             <img
               src={heroAvatar}
-              alt="Foto de perfil sensual"
-              width={768}
-              height={768}
+              alt="Casal Novinho Maringá"
               className="h-full w-full object-cover"
             />
           </div>
         </div>
 
-        {/* Name + bio */}
-        <h1 className="text-center text-5xl font-semibold italic leading-none">
-          <span className="text-gold-gradient">Lust</span>
-          <span className="text-foreground"> & </span>
-          <span className="text-gold-gradient">Co.</span>
+        <h1 className="text-center text-4xl font-semibold italic leading-tight">
+          <span className="text-gold-gradient">Casal Novinho</span>
+          <br />
+          <span className="text-foreground">Maringá</span>
         </h1>
-        <p className="mt-3 text-center text-sm leading-relaxed text-muted-foreground max-w-xs">
-          Bem-vindo ao meu mundo. Aqui você encontra tudo que sua imaginação pede — sem censura, sem pressa.
+        <p className="mt-4 text-center text-sm leading-relaxed text-muted-foreground max-w-xs">
+          Casados, liberais, só saímos juntos. Confira nossos conteúdos exclusivos no botão abaixo.
         </p>
 
-        {/* Tags */}
         <div className="mt-4 flex flex-wrap justify-center gap-2">
-          {["Sensual", "Exclusivo", "Sem Tabu"].map((t) => (
+          {["Casados", "Liberais", "Só Juntos"].map((t) => (
             <span key={t} className="rounded-full bg-card-gradient border border-crimson/20 px-3 py-1 text-[11px] font-medium uppercase tracking-wider text-rose">
               {t}
             </span>
           ))}
         </div>
 
-        {/* Links */}
         <nav className="mt-10 flex w-full flex-col gap-3">
           {links.map((l) => {
             const Icon = l.icon;
@@ -125,7 +111,6 @@ function Index() {
           })}
         </nav>
 
-        {/* Footer */}
         <footer className="mt-12 flex flex-col items-center gap-2 text-center">
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <Heart className="h-3 w-3 fill-crimson text-crimson" />
@@ -133,7 +118,7 @@ function Index() {
             <Heart className="h-3 w-3 fill-crimson text-crimson" />
           </div>
           <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground/60">
-            © {new Date().getFullYear()} Lust & Co.
+            © {new Date().getFullYear()} Casal Novinho Maringá
           </p>
         </footer>
       </div>
