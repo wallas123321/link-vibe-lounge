@@ -79,7 +79,7 @@ function Index() {
         </p>
 
         <div className="mt-4 flex flex-wrap justify-center gap-2">
-          {["Casados", "Liberais", "Só Juntos"].map((t) => (
+          {["Casados", "Liberais", "Maringá"].map((t) => (
             <span
               key={t}
               className="rounded-full bg-card-gradient border border-crimson/20 px-3 py-1 text-[11px] font-medium uppercase tracking-wider text-rose"
