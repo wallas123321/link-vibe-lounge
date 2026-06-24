@@ -8,9 +8,15 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Casal Novinho Maringá" },
-      { name: "description", content: "Casados, liberais, só saímos juntos. Confira nossos conteúdos exclusivos no botão abaixo." },
+      {
+        name: "description",
+        content: "Casados, liberais, só saímos juntos. Confira nossos conteúdos exclusivos no botão abaixo.",
+      },
       { property: "og:title", content: "Casal Novinho Maringá" },
-      { property: "og:description", content: "Casados, liberais, só saímos juntos. Confira nossos conteúdos exclusivos no botão abaixo." },
+      {
+        property: "og:description",
+        content: "Casados, liberais, só saímos juntos. Confira nossos conteúdos exclusivos no botão abaixo.",
+      },
     ],
   }),
   component: Index,
@@ -26,7 +32,14 @@ type LinkItem = {
 };
 
 const links: LinkItem[] = [
-  { label: "Conteúdo VIP Exclusivo", sub: "Acesso completo", href: "https://privacy.com.br/checkout/casaldemaringa", icon: Crown, logo: privacyLogo.url, featured: true },
+  {
+    label: "Conteúdo VIP Exclusivo",
+    sub: "Acesso completo",
+    href: "https://privacy.com.br/checkout/casaldemaringa",
+    icon: Crown,
+    logo: privacyLogo.url,
+    featured: true,
+  },
   { label: "Maringá Hot", sub: "Nosso grupo", href: "https://maringahot.club/", icon: Flame, logo: maringaHotLogo.url },
 ];
 
@@ -34,18 +47,16 @@ function Index() {
   return (
     <main className="bg-hero relative min-h-screen overflow-hidden">
       <div className="pointer-events-none absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-crimson/30 blur-[120px] animate-smoke" />
-      <div className="pointer-events-none absolute -bottom-40 -right-40 h-[500px] w-[500px] rounded-full bg-rose/20 blur-[140px] animate-smoke" style={{ animationDelay: "2s" }} />
+      <div
+        className="pointer-events-none absolute -bottom-40 -right-40 h-[500px] w-[500px] rounded-full bg-rose/20 blur-[140px] animate-smoke"
+        style={{ animationDelay: "2s" }}
+      />
 
       <div className="relative mx-auto flex min-h-screen max-w-md flex-col items-center px-5 py-12">
-
         <div className="relative mb-6">
           <div className="absolute inset-0 rounded-full bg-crimson/40 blur-2xl animate-pulse-glow" />
           <div className="relative h-36 w-36 overflow-hidden rounded-full ring-2 ring-crimson/60 ring-offset-4 ring-offset-background shadow-glow">
-            <img
-              src={heroAvatar}
-              alt="Casal Novinho Maringá"
-              className="h-full w-full object-cover"
-            />
+            <img src={heroAvatar} alt="Casal Novinho Maringá" className="h-full w-full object-cover" />
           </div>
         </div>
 
@@ -53,7 +64,6 @@ function Index() {
           CRS 192294
         </div>
         <h1 className="text-center text-4xl font-semibold italic leading-tight">
-
           <span className="text-gold-gradient">Casal Novinho</span>
           <br />
           <span className="text-foreground">Maringá</span>
@@ -64,7 +74,10 @@ function Index() {
 
         <div className="mt-4 flex flex-wrap justify-center gap-2">
           {["Casados", "Liberais", "Só Juntos"].map((t) => (
-            <span key={t} className="rounded-full bg-card-gradient border border-crimson/20 px-3 py-1 text-[11px] font-medium uppercase tracking-wider text-rose">
+            <span
+              key={t}
+              className="rounded-full bg-card-gradient border border-crimson/20 px-3 py-1 text-[11px] font-medium uppercase tracking-wider text-rose"
+            >
               {t}
             </span>
           ))}
@@ -123,7 +136,7 @@ function Index() {
         <footer className="mt-12 flex flex-col items-center gap-2 text-center">
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <Heart className="h-3 w-3 fill-crimson text-crimson" />
-            <span>Apenas para maiores de 18 anos</span>
+            <span>Maringá-Pr</span>
             <Heart className="h-3 w-3 fill-crimson text-crimson" />
           </div>
           <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground/60">
