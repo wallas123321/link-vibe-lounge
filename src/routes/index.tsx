@@ -40,7 +40,13 @@ const links: LinkItem[] = [
     logo: privacyLogo.url,
     featured: true,
   },
-  { label: "Maringá Hot", sub: "Nosso grupo", href: "https://maringahot.club/", icon: Flame, logo: maringaHotLogo.url },
+  {
+    label: "Maringá Hot",
+    sub: "Rede Social Para Liberais de Maringá e Região",
+    href: "https://maringahot.club/",
+    icon: Flame,
+    logo: maringaHotLogo.url,
+  },
 ];
 
 function Index() {
