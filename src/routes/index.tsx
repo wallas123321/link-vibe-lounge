@@ -36,12 +36,6 @@ function Index() {
       <div className="pointer-events-none absolute -bottom-40 -right-40 h-[500px] w-[500px] rounded-full bg-rose/20 blur-[140px] animate-smoke" style={{ animationDelay: "2s" }} />
 
       <div className="relative mx-auto flex min-h-screen max-w-md flex-col items-center px-5 py-12">
-        <div className="mb-8 flex items-center gap-2 rounded-full border border-crimson/40 bg-background/40 px-4 py-1.5 backdrop-blur-md">
-          <Sparkles className="h-3.5 w-3.5 text-crimson" />
-          <span className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
-            Somente +18
-          </span>
-        </div>
 
         <div className="relative mb-6">
           <div className="absolute inset-0 rounded-full bg-crimson/40 blur-2xl animate-pulse-glow" />
