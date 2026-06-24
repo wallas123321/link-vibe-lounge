@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Heart, Sparkles, Crown, Flame } from "lucide-react";
+import { Heart, Crown, Flame } from "lucide-react";
 import heroAvatar from "@/assets/casal.jpg";
 import privacyLogo from "@/assets/privacy-logo.png.asset.json";
 
