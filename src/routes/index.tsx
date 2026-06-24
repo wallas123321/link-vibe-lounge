@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Heart, Sparkles, Crown, Flame } from "lucide-react";
 import heroAvatar from "@/assets/casal.jpg";
+import privacyLogo from "@/assets/privacy-logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -19,11 +20,12 @@ type LinkItem = {
   sub?: string;
   href: string;
   icon: React.ComponentType<{ className?: string }>;
+  logo?: string;
   featured?: boolean;
 };
 
 const links: LinkItem[] = [
-  { label: "Conteúdo VIP Exclusivo", sub: "Acesso completo", href: "https://privacy.com.br/checkout/casaldemaringa", icon: Crown, featured: true },
+  { label: "Conteúdo VIP Exclusivo", sub: "Acesso completo", href: "https://privacy.com.br/checkout/casaldemaringa", icon: Crown, logo: privacyLogo.url, featured: true },
   { label: "Maringá Hot", sub: "Nosso grupo", href: "https://maringahot.club/", icon: Flame },
 ];
 
@@ -79,8 +81,12 @@ function Index() {
                   href={l.href}
                   className="bg-button-gradient group relative flex items-center gap-4 overflow-hidden rounded-2xl px-5 py-4 shadow-button-elegant transition-all hover:scale-[1.02] hover:shadow-glow"
                 >
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-background/25 backdrop-blur-sm">
-                    <Icon className="h-5 w-5 text-foreground" />
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/95 backdrop-blur-sm p-1.5">
+                    {l.logo ? (
+                      <img src={l.logo} alt={l.label} className="h-full w-full object-contain" />
+                    ) : (
+                      <Icon className="h-5 w-5 text-foreground" />
+                    )}
                   </div>
                   <div className="flex-1 text-left">
                     <div className="text-sm font-semibold tracking-wide text-foreground">{l.label}</div>
