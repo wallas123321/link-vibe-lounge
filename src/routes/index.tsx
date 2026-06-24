@@ -54,7 +54,11 @@ function Index() {
           </div>
         </div>
 
+        <div className="mb-2 rounded-full border border-gold/40 bg-background/40 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-gold backdrop-blur-md">
+          CRS 192294
+        </div>
         <h1 className="text-center text-4xl font-semibold italic leading-tight">
+
           <span className="text-gold-gradient">Casal Novinho</span>
           <br />
           <span className="text-foreground">Maringá</span>
