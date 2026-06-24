@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Heart, Crown, Flame } from "lucide-react";
 import heroAvatar from "@/assets/casal.jpg";
 import privacyLogo from "@/assets/privacy-logo.png.asset.json";
+import maringaHotLogo from "@/assets/maringa-hot-logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
