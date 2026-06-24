@@ -27,7 +27,7 @@ type LinkItem = {
 
 const links: LinkItem[] = [
   { label: "Conteúdo VIP Exclusivo", sub: "Acesso completo", href: "https://privacy.com.br/checkout/casaldemaringa", icon: Crown, logo: privacyLogo.url, featured: true },
-  { label: "Maringá Hot", sub: "Nosso grupo", href: "https://maringahot.club/", icon: Flame },
+  { label: "Maringá Hot", sub: "Nosso grupo", href: "https://maringahot.club/", icon: Flame, logo: maringaHotLogo.url },
 ];
 
 function Index() {
