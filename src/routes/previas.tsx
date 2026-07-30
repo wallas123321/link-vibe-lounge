@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Eye, X } from "lucide-react";
+import { ArrowLeft, Eye, Flame, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import snap46 from "@/assets/previas/snap46.png";
 import snap39 from "@/assets/previas/snap39.png";
@@ -129,9 +129,25 @@ function PreviasPage() {
           ))}
         </section>
 
-        <p className="mt-10 text-center text-xs text-muted-foreground">
-          Quer o conteúdo completo? Assine nosso pack exclusivo 💋
-        </p>
+        <section className="mt-12 mb-4 flex flex-col items-center gap-4 rounded-2xl border border-crimson/20 bg-card/40 px-5 py-8 text-center sm:px-10">
+          <h2 className="text-lg font-semibold leading-snug sm:text-xl">
+            <span className="text-gold-gradient">Estes e muitos outros</span>{" "}
+            <span className="text-foreground">conteúdos exclusivos</span>
+          </h2>
+          <p className="max-w-md text-sm text-muted-foreground">
+            Fotos e vídeos completos do casal, sem censura, te esperando no botão
+            abaixo 💋
+          </p>
+          <a
+            href="https://privacy.com.br/checkout/casaldemaringa"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-amber-500 via-orange-500 to-rose-600 px-6 py-3.5 text-sm font-bold uppercase tracking-wide text-white shadow-lg transition-all hover:from-amber-400 hover:via-orange-400 hover:to-rose-500 hover:shadow-[0_0_30px_-2px_rgba(249,115,22,0.6)] active:scale-95 sm:px-8 sm:text-base"
+          >
+            <Flame className="h-5 w-5" />
+            Ver conteúdo completo
+          </a>
+        </section>
       </div>
 
       {active && (
