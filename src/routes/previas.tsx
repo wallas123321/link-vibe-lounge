@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Eye, Flame, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { ArrowLeft, Eye, Flame } from "lucide-react";
 import snap46 from "@/assets/previas/snap46.png";
 import snap39 from "@/assets/previas/snap39.png";
 import picsart from "@/assets/previas/picsart.jpg";
@@ -28,6 +27,8 @@ export const Route = createFileRoute("/previas")({
   component: PreviasPage,
 });
 
+const CHECKOUT_URL = "https://privacy.com.br/checkout/casaldemaringa";
+
 type PhotoItem = {
   id: string;
   title: string;
@@ -47,19 +48,6 @@ const items: PhotoItem[] = [
 ];
 
 function PreviasPage() {
-  const [active, setActive] = useState<PhotoItem | null>(null);
-
-  useEffect(() => {
-    if (!active) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setActive(null);
-    window.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-    };
-  }, [active]);
-
   return (
     <main className="bg-hero relative min-h-screen overflow-hidden">
       <div className="pointer-events-none absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-crimson/30 blur-[120px] animate-smoke" />
@@ -89,10 +77,12 @@ function PreviasPage() {
 
         <section className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
           {items.map((item) => (
-            <button
+            <a
               key={item.id}
-              onClick={() => setActive(item)}
-              className="group cursor-pointer overflow-hidden rounded-xl border border-crimson/15 bg-card/40 text-left transition-all hover:border-crimson/50 hover:shadow-[0_0_30px_-5px_rgba(220,38,38,0.4)]"
+              href={CHECKOUT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block cursor-pointer overflow-hidden rounded-xl border border-crimson/15 bg-card/40 text-left transition-all hover:border-crimson/50 hover:shadow-[0_0_30px_-5px_rgba(220,38,38,0.4)]"
             >
               <div className="relative aspect-[3/4] overflow-hidden bg-muted">
                 <img
@@ -111,21 +101,15 @@ function PreviasPage() {
               </div>
 
               <div className="p-2.5">
-                <a
-                  href="https://privacy.com.br/checkout/casaldemaringa"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                  className="flex items-center justify-center rounded-lg bg-gradient-to-r from-amber-500 via-orange-500 to-rose-600 px-2 py-2 text-center text-[11px] font-bold uppercase leading-tight tracking-wide text-white shadow-md transition-all hover:from-amber-400 hover:via-orange-400 hover:to-rose-500 hover:shadow-[0_0_20px_-2px_rgba(249,115,22,0.6)] active:scale-95 sm:px-3 sm:text-xs"
-                >
+                <span className="flex items-center justify-center rounded-lg bg-gradient-to-r from-amber-500 via-orange-500 to-rose-600 px-2 py-2 text-center text-[11px] font-bold uppercase leading-tight tracking-wide text-white shadow-md transition-all group-hover:from-amber-400 group-hover:via-orange-400 group-hover:to-rose-500 group-hover:shadow-[0_0_20px_-2px_rgba(249,115,22,0.6)] group-active:scale-95 sm:px-3 sm:text-xs">
                   Acessar conteúdo exclusivo
-                </a>
+                </span>
                 <div className="mt-2 flex items-center justify-center gap-1 text-[11px] text-muted-foreground">
                   <Eye className="h-3 w-3" />
                   {item.views} views
                 </div>
               </div>
-            </button>
+            </a>
           ))}
         </section>
 
@@ -149,27 +133,6 @@ function PreviasPage() {
           </a>
         </section>
       </div>
-
-      {active && (
-        <div
-          onClick={() => setActive(null)}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm animate-in fade-in"
-        >
-          <button
-            onClick={() => setActive(null)}
-            aria-label="Fechar"
-            className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-crimson/90 text-white transition hover:bg-crimson"
-          >
-            <X className="h-5 w-5" />
-          </button>
-          <img
-            src={active.thumb}
-            alt={active.title}
-            onClick={(e) => e.stopPropagation()}
-            className="max-h-[90vh] max-w-full rounded-lg object-contain shadow-2xl blur-[8px] brightness-110"
-          />
-        </div>
-      )}
     </main>
   );
 }
