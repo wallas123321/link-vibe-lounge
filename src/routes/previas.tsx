@@ -1,14 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, Eye, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import snap46 from "@/assets/previas/snap46.png.asset.json";
-import snap39 from "@/assets/previas/snap39.png.asset.json";
-import picsart from "@/assets/previas/picsart.jpg.asset.json";
-import fotinha from "@/assets/previas/fotinha.png.asset.json";
-import marido from "@/assets/previas/marido.jpg.asset.json";
-import vid9 from "@/assets/previas/vid9.jpg.asset.json";
-import foto7 from "@/assets/previas/foto7.jpg.asset.json";
-import foto9 from "@/assets/previas/foto9.png.asset.json";
+import snap46 from "@/assets/previas/snap46.png";
+import snap39 from "@/assets/previas/snap39.png";
+import picsart from "@/assets/previas/picsart.jpg";
+import fotinha from "@/assets/previas/fotinha.png";
+import marido from "@/assets/previas/marido.jpg";
+import vid9 from "@/assets/previas/vid9.jpg";
+import foto7 from "@/assets/previas/foto7.jpg";
+import foto9 from "@/assets/previas/foto9.png";
 
 export const Route = createFileRoute("/previas")({
   head: () => ({
@@ -36,14 +36,14 @@ type PhotoItem = {
 };
 
 const items: PhotoItem[] = [
-  { id: "1", title: "Prévia quente na cama", views: "12.4k", thumb: snap46.url },
-  { id: "2", title: "De quatro pra ele", views: "8.9k", thumb: snap39.url },
-  { id: "3", title: "Boquete molhado", views: "5.2k", thumb: picsart.url },
-  { id: "4", title: "Bundão sentando", views: "21.1k", thumb: fotinha.url },
-  { id: "5", title: "Marido dotado", views: "17.7k", thumb: marido.url },
-  { id: "6", title: "Chupando gostoso", views: "9.3k", thumb: vid9.url },
-  { id: "7", title: "Sentando gostoso", views: "14.6k", thumb: foto7.url },
-  { id: "8", title: "Gozada na boca", views: "19.8k", thumb: foto9.url },
+  { id: "1", title: "Prévia quente na cama", views: "12.4k", thumb: snap46 },
+  { id: "2", title: "De quatro pra ele", views: "8.9k", thumb: snap39 },
+  { id: "3", title: "Boquete molhado", views: "5.2k", thumb: picsart },
+  { id: "4", title: "Bundão sentando", views: "21.1k", thumb: fotinha },
+  { id: "5", title: "Marido dotado", views: "17.7k", thumb: marido },
+  { id: "6", title: "Chupando gostoso", views: "9.3k", thumb: vid9 },
+  { id: "7", title: "Sentando gostoso", views: "14.6k", thumb: foto7 },
+  { id: "8", title: "Gozada na boca", views: "19.8k", thumb: foto9 },
 ];
 
 function PreviasPage() {
