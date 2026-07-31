@@ -4,19 +4,23 @@ import heroAvatar from "@/assets/casal.jpg";
 
 import maringaHotLogo from "@/assets/maringa-hot-logo.png.asset.json";
 import privacyLogo from "@/assets/privacy-logo.png.asset.json";
+import { SITE_URL, DEFAULT_TITLE, DEFAULT_DESCRIPTION, SEO_KEYWORDS, SITE_JSONLD } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Casal Novinho Maringá" },
+      { title: DEFAULT_TITLE },
+      { name: "description", content: DEFAULT_DESCRIPTION },
+      { name: "keywords", content: SEO_KEYWORDS },
+      { property: "og:title", content: DEFAULT_TITLE },
+      { property: "og:description", content: DEFAULT_DESCRIPTION },
+      { property: "og:url", content: SITE_URL },
+    ],
+    links: [{ rel: "canonical", href: SITE_URL }],
+    scripts: [
       {
-        name: "description",
-        content: "Casados, liberais, só saímos juntos. Confira nossos conteúdos exclusivos no botão abaixo.",
-      },
-      { property: "og:title", content: "Casal Novinho Maringá" },
-      {
-        property: "og:description",
-        content: "Casados, liberais, só saímos juntos. Confira nossos conteúdos exclusivos no botão abaixo.",
+        type: "application/ld+json",
+        children: JSON.stringify(SITE_JSONLD),
       },
     ],
   }),
@@ -137,7 +141,20 @@ function Index() {
           })}
         </nav>
 
-        <footer className="mt-12 flex flex-col items-center gap-2 text-center">
+        <section className="mt-12 w-full max-w-xs text-center">
+          <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            Casal Liberal em Maringá — PR
+          </h2>
+          <p className="mt-3 text-[11px] leading-relaxed text-muted-foreground/70">
+            Somos um casal de Maringá do meio liberal. Vivemos o estilo de vida swing,
+            hotwife, cuckold e ménage com discrição e respeito. Produzimos conteúdo
+            exclusivo e conhecemos casais e solteiros selecionados de Maringá, Sarandi,
+            Paiçandu, Londrina e região noroeste do Paraná. Relacionamento aberto,
+            sempre juntos, sempre com consentimento.
+          </p>
+        </section>
+
+        <footer className="mt-8 flex flex-col items-center gap-2 text-center">
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <Heart className="h-3 w-3 fill-crimson text-crimson" />
             <span>Maringá-Pr</span>

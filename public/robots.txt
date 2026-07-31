@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://spicy-link-tree.lovable.app/sitemap.xml

@@ -8,21 +8,29 @@ import marido from "@/assets/previas/marido.jpg";
 import vid9 from "@/assets/previas/vid9.jpg";
 import foto7 from "@/assets/previas/foto7.jpg";
 import foto9 from "@/assets/previas/foto9.png";
+import { SITE_URL } from "@/lib/seo";
 
 export const Route = createFileRoute("/previas")({
   head: () => ({
     meta: [
-      { title: "Conteúdos Exclusivos do Casal — Casal Novinho Maringá" },
+      { title: "Prévias e Conteúdo Exclusivo — Casal Liberal de Maringá | Hotwife e Ménage" },
       {
         name: "description",
-        content: "Galeria de conteúdos exclusivos do Casal Novinho Maringá.",
+        content:
+          "Prévias do conteúdo exclusivo do Casal Novinho Maringá. Casal liberal de Maringá-PR: hotwife, ménage e o melhor do meio swing do Paraná.",
       },
-      { property: "og:title", content: "Conteúdos Exclusivos do Casal — Casal Novinho Maringá" },
+      {
+        property: "og:title",
+        content: "Prévias e Conteúdo Exclusivo — Casal Liberal de Maringá | Hotwife e Ménage",
+      },
       {
         property: "og:description",
-        content: "Galeria de conteúdos exclusivos do Casal Novinho Maringá.",
+        content:
+          "Prévias do conteúdo exclusivo do Casal Novinho Maringá. Casal liberal de Maringá-PR: hotwife, ménage e o melhor do meio swing do Paraná.",
       },
+      { property: "og:url", content: `${SITE_URL}/previas` },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/previas` }],
   }),
   component: PreviasPage,
 });
