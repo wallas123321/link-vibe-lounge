@@ -146,11 +146,9 @@ function Index() {
             Casal Liberal em Maringá — PR
           </h2>
           <p className="mt-3 text-[11px] leading-relaxed text-muted-foreground/70">
-            Somos um casal de Maringá do meio liberal. Vivemos o estilo de vida swing,
-            hotwife, cuckold e ménage com discrição e respeito. Produzimos conteúdo
-            exclusivo e conhecemos casais e solteiros selecionados de Maringá, Sarandi,
-            Paiçandu, Londrina e região noroeste do Paraná. Relacionamento aberto,
-            sempre juntos, sempre com consentimento.
+            Somos um casal de Maringá do meio liberal. Produzimos conteúdo exclusivo.
+            Relacionamento aberto, ménage, hotwife, sempre juntos, sempre com
+            consentimento.
           </p>
         </section>
 
