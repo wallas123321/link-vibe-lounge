@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://spicy-link-tree.lovable.app/sitemap.xml
+Sitemap: https://casalmaringa.com/sitemap.xml

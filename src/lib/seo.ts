@@ -1,6 +1,6 @@
 // Configuração central de SEO
 // ⚠️ Quando tiver domínio próprio, troque SITE_URL aqui (uma única vez)
-export const SITE_URL = "https://spicy-link-tree.lovable.app";
+export const SITE_URL = "https://casalmaringa.com";
 
 export const SITE_NAME = "Casal Novinho Maringá";
 
