@@ -147,7 +147,7 @@ function Index() {
           </h2>
           <p className="mt-3 text-[11px] leading-relaxed text-muted-foreground/70">
             Somos um casal de Maringá do meio liberal. Produzimos conteúdo exclusivo.
-            Relacionamento aberto, ménage, hotwife, sempre juntos, sempre com
+            Relacionamento aberto, ménage, hotwife. Casal de Maringá, Casal Maringá, Secrets Maringá, Secrets Club Maringá
             consentimento.
           </p>
         </section>
