@@ -13,7 +13,15 @@ import { drawPhoto, photoBlob, MAX_PHOTO_BYTES } from "@/lib/photo-editor";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
-    meta: [{ title: "Administrar fotos" }, { name: "robots", content: "noindex, nofollow" }],
+    meta: [
+      { title: "Administrar fotos — Casal Novinho Maringá" },
+      { name: "description", content: "Acesso administrativo à galeria de Casal Novinho Maringá." },
+      { property: "og:title", content: "Administrar fotos — Casal Novinho Maringá" },
+      { property: "og:description", content: "Acesso administrativo à galeria de Casal Novinho Maringá." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+      { name: "robots", content: "noindex, nofollow" },
+    ],
   }),
   component: AdminPage,
 });
