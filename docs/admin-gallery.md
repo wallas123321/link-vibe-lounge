@@ -54,6 +54,16 @@ Texto para pedir a ativação ao Lovable após sincronizar o código:
 
 ## Armazenamento e acesso
 
+Antes de enviar uma foto, o painel chama `prepareGalleryUpload` no servidor.
+A função valida a sessão e a presença do usuário em `gallery_admins` antes de
+acessar o cliente administrativo. Se o bucket `gallery-previews` ainda não
+existir, ela o cria pela API do Storage, com acesso público para as prévias,
+limite de 2 MB por arquivo e somente JPEG. Um bucket existente não é alterado.
+Essa preparação requer as variáveis de servidor do Cloud, incluindo
+`SUPABASE_SERVICE_ROLE_KEY`, que nunca deve ser adicionada ao frontend.
+O upload e a gravação da foto continuam usando a sessão do usuário e as políticas RLS.
+Progresso e erros de publicação aparecem junto ao editor, com a etapa que falhou.
+
 O navegador exporta somente uma prévia JPEG de 600 × 800 pixels já desfocada;
 o original não é enviado nem armazenado. O bucket de **prévias** é público para
 permitir a galeria, e os arquivos nele devem sempre ser próprios para essa

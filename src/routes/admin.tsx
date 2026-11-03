@@ -10,6 +10,7 @@ import {
   type GalleryPhoto,
 } from "@/lib/gallery";
 import { drawPhoto, photoBlob, MAX_PHOTO_BYTES } from "@/lib/photo-editor";
+import { prepareGalleryUpload } from "@/lib/gallery-upload.functions";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -17,7 +18,10 @@ export const Route = createFileRoute("/admin")({
       { title: "Administrar fotos — Casal Novinho Maringá" },
       { name: "description", content: "Acesso administrativo à galeria de Casal Novinho Maringá." },
       { property: "og:title", content: "Administrar fotos — Casal Novinho Maringá" },
-      { property: "og:description", content: "Acesso administrativo à galeria de Casal Novinho Maringá." },
+      {
+        property: "og:description",
+        content: "Acesso administrativo à galeria de Casal Novinho Maringá.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "robots", content: "noindex, nofollow" },
@@ -50,8 +54,17 @@ function AdminPage() {
   const [y, setY] = useState(0.5);
   const [title, setTitle] = useState("");
   const [consent, setConsent] = useState(false);
+  const [publishStatus, setPublishStatus] = useState("");
+  const [publishFailed, setPublishFailed] = useState(false);
+  const publishNotice = useRef<HTMLParagraphElement>(null);
+  const publishing = useRef(false);
   const canvas = useRef<HTMLCanvasElement>(null);
   const current = files[0];
+
+  useEffect(() => {
+    if (publishFailed)
+      publishNotice.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }, [publishFailed, publishStatus]);
 
   useEffect(() => {
     if (!galleryClient) {
@@ -195,24 +208,50 @@ function AdminPage() {
       return;
     }
     setMessage("");
+    setPublishStatus("");
+    setPublishFailed(false);
     setFiles(picked);
   }
 
   async function publish(event: FormEvent) {
     event.preventDefault();
-    if (!galleryClient || !canvas.current || !image || !session || !consent || !title.trim())
+    if (publishing.current) return;
+    setPublishFailed(false);
+    if (!galleryClient || !session || !allowed) {
+      setPublishFailed(true);
+      setPublishStatus("Sua sessão não está disponível. Entre novamente no painel.");
       return;
+    }
+    if (!canvas.current || !image || !consent || !title.trim() || title.trim().length > 120) {
+      setPublishFailed(true);
+      setPublishStatus(
+        "Aguarde a prévia, preencha uma descrição de até 120 caracteres e confirme a autorização.",
+      );
+      return;
+    }
+    publishing.current = true;
     setBusy(true);
     setMessage("");
-    const path = `${session.user.id}/${crypto.randomUUID()}.jpg`;
+    let path: string | undefined;
     let uploaded = false;
+    let stage = "preparar a foto";
     try {
+      setPublishStatus("Preparando a prévia…");
+      path = `${session.user.id}/${crypto.randomUUID()}.jpg`;
       const blob = await photoBlob(canvas.current);
+      stage = "preparar o armazenamento";
+      setPublishStatus("Preparando o armazenamento…");
+      const prepared = await prepareGalleryUpload();
+      if (!prepared.ok) throw new Error(prepared.error);
+      stage = "enviar a foto";
+      setPublishStatus("Enviando a foto…");
       const { error: uploadError } = await galleryClient.storage
         .from(PHOTO_BUCKET)
         .upload(path, blob, { contentType: "image/jpeg", upsert: false });
       if (uploadError) throw uploadError;
       uploaded = true;
+      stage = "salvar a foto na galeria";
+      setPublishStatus("Salvando na galeria…");
       const { data, error } = await galleryClient
         .from("gallery_photos")
         .insert({ title: title.trim(), storage_path: path })
@@ -221,21 +260,43 @@ function AdminPage() {
       if (error) throw error;
       setPhotos((previous) => [data as GalleryPhoto, ...previous]);
       setFiles((previous) => previous.slice(1));
-      setMessage("Foto publicada na galeria.");
-    } catch {
-      if (uploaded) {
+      setPublishStatus("Foto publicada na galeria.");
+    } catch (error) {
+      console.error(`Falha ao ${stage}`, error);
+      let recoveryNotice = "";
+      if (uploaded && path) {
         // A lost insert response may still mean success; never delete that preview.
-        const { data, error } = await galleryClient
-          .from("gallery_photos")
-          .select("id")
-          .eq("storage_path", path)
-          .maybeSingle();
-        if (!error && !data) await galleryClient.storage.from(PHOTO_BUCKET).remove([path]);
+        try {
+          const recovered = await galleryClient
+            .from("gallery_photos")
+            .select("id, title, storage_path, created_at")
+            .eq("storage_path", path)
+            .maybeSingle();
+          if (recovered.data && !recovered.error) {
+            const photo = recovered.data as GalleryPhoto;
+            setPhotos((previous) => [photo, ...previous.filter((item) => item.id !== photo.id)]);
+            setFiles((previous) => previous.slice(1));
+            setPublishStatus("Foto publicada na galeria.");
+            return;
+          }
+          if (!recovered.error && !recovered.data) {
+            const removed = await galleryClient.storage.from(PHOTO_BUCKET).remove([path]);
+            if (removed.error) recoveryNotice = " O arquivo enviado ainda está no armazenamento.";
+          } else {
+            recoveryNotice = " Atualize a lista antes de tentar novamente.";
+          }
+        } catch {
+          recoveryNotice = " Atualize a lista antes de tentar novamente.";
+        }
       }
-      setMessage(
-        "Não foi possível confirmar a publicação. Atualize a lista antes de tentar novamente.",
-      );
+      const detail =
+        error && typeof error === "object" && "message" in error
+          ? String(error.message).slice(0, 400)
+          : "Erro inesperado. Tente novamente.";
+      setPublishFailed(true);
+      setPublishStatus(`Não foi possível ${stage}: ${detail}${recoveryNotice}`);
     } finally {
+      publishing.current = false;
       setBusy(false);
     }
   }
@@ -370,7 +431,7 @@ function AdminPage() {
                 JPG, PNG ou WebP · até 15 MB por foto. Ajuste e publique uma foto por vez.
               </p>
               {current && (
-                <form onSubmit={publish} className="mt-6 grid gap-6 md:grid-cols-2">
+                <form noValidate onSubmit={publish} className="mt-6 grid gap-6 md:grid-cols-2">
                   <div>
                     <p className="mb-2 break-all text-xs text-muted-foreground">
                       {current.name} · {files.length} foto(s) na fila
@@ -491,6 +552,15 @@ function AdminPage() {
                     </button>
                   </fieldset>
                 </form>
+              )}
+              {publishStatus && (
+                <p
+                  ref={publishNotice}
+                  role={publishFailed ? "alert" : "status"}
+                  className={`mt-4 rounded-lg border p-3 text-sm ${publishFailed ? "border-rose-500/60 bg-rose-950/50" : "border-gold/40 bg-background/60"}`}
+                >
+                  {publishStatus}
+                </p>
               )}
             </section>
             <section className="mt-10">
