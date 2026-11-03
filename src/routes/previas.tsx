@@ -9,6 +9,7 @@ import vid9 from "@/assets/previas/vid9.jpg";
 import foto7 from "@/assets/previas/foto7.jpg";
 import foto9 from "@/assets/previas/foto9.png";
 import { SITE_URL } from "@/lib/seo";
+import { UploadedPhotos } from "@/components/uploaded-photos";
 
 export const Route = createFileRoute("/previas")({
   head: () => ({
@@ -84,6 +85,7 @@ function PreviasPage() {
         </header>
 
         <section className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
+          <UploadedPhotos />
           {items.map((item) => (
             <a
               key={item.id}
