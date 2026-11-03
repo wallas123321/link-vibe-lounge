@@ -11,9 +11,11 @@ criar outro serviço. Ele exige login e autorização na tabela `gallery_admins`
    no **backend Cloud do próprio projeto**. O arquivo cria duas tabelas, um bucket
    e as políticas de acesso. Não basta ter o arquivo no GitHub: ele precisa ser
    aplicado no banco. A migração é executada uma única vez.
-3. Conecte o frontend usando os valores públicos já gerenciados pelo Lovable:
+3. Preserve a integração Cloud já gerada pelo Lovable e seus valores públicos:
    `VITE_SUPABASE_URL` e `VITE_SUPABASE_PUBLISHABLE_KEY` (a chave pública antiga
-   `VITE_SUPABASE_ANON_KEY` também é aceita). Os valores ficam no `.env` do projeto;
+   `VITE_SUPABASE_ANON_KEY` também é aceita na verificação de configuração). O painel
+   reutiliza `src/integrations/supabase/client.ts`, incluindo o adaptador de
+   requisições e autenticação do preview do Lovable. Os valores ficam no `.env` do projeto;
    para desenvolvimento local use `.env.local`. Nunca use uma chave `service_role`
    ou uma chave secreta no frontend.
 4. Crie ou selecione sua conta em **Users** no backend do Lovable, com login por
@@ -32,8 +34,8 @@ criar outro serviço. Ele exige login e autorização na tabela `gallery_admins`
 Texto para pedir a ativação ao Lovable após sincronizar o código:
 
 > Use o Lovable Cloud deste projeto para ativar o painel /admin já implementado.
-> Aplique supabase/migrations/20261103000100_admin_gallery.sql no backend, conecte
-> VITE_SUPABASE_URL e VITE_SUPABASE_PUBLISHABLE_KEY do próprio projeto e me ajude a
+> Aplique supabase/migrations/20261103000100_admin_gallery.sql no backend, preserve
+> a integração e as variáveis públicas já existentes do Cloud e me ajude a
 > cadastrar minha conta em gallery_admins. Preserve as políticas RLS e não crie
 > outro backend. Teste login de administrador, bloqueio de usuários comuns,
 > upload de uma foto não explícita, aparição em /previas e exclusão.
