@@ -1,8 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Heart, Crown, Flame } from "lucide-react";
+import { Heart, Crown } from "lucide-react";
 import heroAvatar from "@/assets/casal.jpg";
 
-import maringaHotLogo from "@/assets/maringa-hot-logo.png.asset.json";
 import privacyLogo from "@/assets/privacy-logo.png.asset.json";
 import { SITE_URL, DEFAULT_TITLE, DEFAULT_DESCRIPTION, SEO_KEYWORDS, SITE_JSONLD } from "@/lib/seo";
 
@@ -15,6 +14,8 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: DEFAULT_TITLE },
       { property: "og:description", content: DEFAULT_DESCRIPTION },
       { property: "og:url", content: SITE_URL },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: SITE_URL }],
     scripts: [
@@ -45,13 +46,6 @@ const links: LinkItem[] = [
     icon: Crown,
     logo: privacyLogo.url,
     featured: true,
-  },
-  {
-    label: "Maringá Hot",
-    sub: "Rede Social Para Liberais de Maringá e Região",
-    href: "https://maringahot.club/",
-    icon: Flame,
-    logo: maringaHotLogo.url,
   },
 ];
 
