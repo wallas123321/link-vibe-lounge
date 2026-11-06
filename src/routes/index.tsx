@@ -49,7 +49,7 @@ const links: LinkItem[] = [
     logo: maringaLogo.url,
   },
   {
-    label: "Conteúdo VIP Exclusivo",
+    label: "Assista nossos v1de0s P@rn0+18",
     sub: "Acesso completo",
     to: "/previas",
     icon: Crown,
