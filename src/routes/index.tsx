@@ -3,6 +3,7 @@ import { Heart, Crown } from "lucide-react";
 import { ZapLiberalDownload } from "@/components/zapliberal-download";
 import heroAvatar from "@/assets/casal.jpg";
 
+import maringaLogo from "@/assets/maringa-hot-logo.png.asset.json";
 import privacyLogo from "@/assets/privacy-logo.png.asset.json";
 import { SITE_URL, DEFAULT_TITLE, DEFAULT_DESCRIPTION, SEO_KEYWORDS, SITE_JSONLD } from "@/lib/seo";
 
@@ -40,6 +41,13 @@ type LinkItem = {
 };
 
 const links: LinkItem[] = [
+  {
+    label: "Maringá Hot",
+    sub: "Nossa rede social",
+    href: "https://maringahot.club",
+    icon: Heart,
+    logo: maringaLogo.url,
+  },
   {
     label: "Conteúdo VIP Exclusivo",
     sub: "Acesso completo",
