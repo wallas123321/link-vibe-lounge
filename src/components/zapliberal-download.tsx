@@ -20,7 +20,7 @@ export function ZapLiberalDownload() {
           <img src="/zapliberal.svg" alt="" className="h-11 w-11 shrink-0 rounded-xl" />
           <span className="min-w-0 flex-1">
             <span className="block text-sm font-semibold text-foreground">Baixar ZapLiberal</span>
-            <span className="block text-xs text-foreground/80">Nosso grupo privado · Android e iPhone</span>
+              <span className="block text-xs text-foreground/80">Encontre grupos privados no Zap em Maringá e Região · Para Android e iPhone</span>
           </span>
           <Download className="h-5 w-5 shrink-0 text-foreground" aria-hidden="true" />
         </button>
