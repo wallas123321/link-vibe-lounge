@@ -1,0 +1,23 @@
+const enc=new TextEncoder(),dec=new TextDecoder();
+export const encode=b=>btoa(String.fromCharCode(...new Uint8Array(b))).replaceAll('+','-').replaceAll('/','_').replace(/=+$/,'');
+export const decode=s=>Uint8Array.from(atob(s.replaceAll('-','+').replaceAll('_','/')+'='.repeat((4-s.length%4)%4)),c=>c.charCodeAt(0));
+export const randomKey=()=>encode(crypto.getRandomValues(new Uint8Array(32)));
+const aes=key=>crypto.subtle.importKey('raw',decode(key),'AES-GCM',false,['encrypt','decrypt']);
+export async function seal(text,key,aad){const iv=crypto.getRandomValues(new Uint8Array(12));return {iv:encode(iv),ciphertext:encode(await crypto.subtle.encrypt({name:'AES-GCM',iv,additionalData:enc.encode(aad)},await aes(key),enc.encode(text)))};}
+export async function open(payload,key,aad){return dec.decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:decode(payload.iv),additionalData:enc.encode(aad)},await aes(key),decode(payload.ciphertext)));}
+export async function encryptMessage(room,user,text,key){const id=crypto.randomUUID();return {id,...await seal(JSON.stringify({v:1,text}),key,room+'|'+user+'|'+id)};}
+export async function decryptMessage(room,m,key){return JSON.parse(await open(m,key,room+'|'+m.author+'|'+m.id)).text;}
+export async function identity(){const pair=await crypto.subtle.generateKey({name:'ECDH',namedCurve:'P-256'},true,['deriveBits']);return {public:encode(await crypto.subtle.exportKey('spki',pair.publicKey)),private:encode(await crypto.subtle.exportKey('pkcs8',pair.privateKey))};}
+async function wrapping(privateValue,publicValue,context){const own=await crypto.subtle.importKey('pkcs8',decode(privateValue),{name:'ECDH',namedCurve:'P-256'},false,['deriveBits']),other=await crypto.subtle.importKey('spki',decode(publicValue),{name:'ECDH',namedCurve:'P-256'},false,[]);const secret=new Uint8Array(await crypto.subtle.deriveBits({name:'ECDH',public:other},own,256)),ctx=enc.encode(context),joined=new Uint8Array(secret.length+ctx.length);joined.set(secret);joined.set(ctx,secret.length);return encode(await crypto.subtle.digest('SHA-256',joined));}
+export async function wrap(room,user,key,recipient){const pair=await identity(),ctx='ZapLiberal group key v1|'+room+'|'+user;return {publicKey:pair.public,...await seal(key,await wrapping(pair.private,recipient,ctx),ctx)};}
+export async function unwrap(room,user,envelope,own){const ctx='ZapLiberal group key v1|'+room+'|'+user;const key=await open(envelope,await wrapping(own,envelope.publicKey,ctx),ctx);if(decode(key).length!==32)throw Error('Chave inválida.');return key;}
+async function recoveryKey(password,salt){if(password.length<12)throw Error('Use uma senha com pelo menos 12 caracteres.');const base=await crypto.subtle.importKey('raw',enc.encode(password),'PBKDF2',false,['deriveBits']);return encode(await crypto.subtle.deriveBits({name:'PBKDF2',hash:'SHA-256',salt,iterations:210000},base,256));}
+export async function exportRecovery(data,password){const salt=crypto.getRandomValues(new Uint8Array(16));const p=await seal(JSON.stringify(data),await recoveryKey(password,salt),'ZapLiberal recovery v1');return {app:'ZapLiberal',v:1,salt:encode(salt),iv:p.iv,data:p.ciphertext};}
+export async function importRecovery(file,password){if(file.app!=='ZapLiberal'||file.v!==1)throw Error('Arquivo inválido.');return JSON.parse(await open({iv:file.iv,ciphertext:file.data},await recoveryKey(password,decode(file.salt)),'ZapLiberal recovery v1'));}
+let db;
+function database(){return db||(db=new Promise((resolve,reject)=>{const request=indexedDB.open('zapliberal-v1',1);request.onupgradeneeded=()=>request.result.createObjectStore('vault');request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error);}));}
+async function item(mode,key,value){const d=await database();return new Promise((resolve,reject)=>{const tx=d.transaction('vault',mode),s=tx.objectStore('vault'),req=mode==='readonly'?s.get(key):s.put(value,key);tx.oncomplete=()=>resolve(req.result);tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error);});}
+async function master(){let key=await item('readonly','master');if(!key){key=await crypto.subtle.generateKey({name:'AES-GCM',length:256},false,['encrypt','decrypt']);await item('readwrite','master',key);}return key;}
+export async function saveAccount(account){const iv=crypto.getRandomValues(new Uint8Array(12)),data=await crypto.subtle.encrypt({name:'AES-GCM',iv},await master(),enc.encode(JSON.stringify(account)));await item('readwrite','account',{iv,data});}
+export async function loadAccount(){const p=await item('readonly','account');return p?JSON.parse(dec.decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:p.iv},await master(),p.data))):null;}
+

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Download, LockKeyhole, Bell, UserRound } from "lucide-react";
 import {
   Dialog, DialogTrigger, DialogContent, DialogHeader,
@@ -7,6 +8,8 @@ import {
 const APK_URL = "https://rydaouudvgqfmkwuzkyu.supabase.co/functions/v1/zapliberal-baixar";
 
 export function ZapLiberalDownload() {
+  const [isIOS, setIsIOS] = useState(false);
+  useEffect(() => { setIsIOS(/iPhone|iPad|iPod/i.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)); }, []);
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -17,7 +20,7 @@ export function ZapLiberalDownload() {
           <img src="/zapliberal.svg" alt="" className="h-11 w-11 shrink-0 rounded-xl" />
           <span className="min-w-0 flex-1">
             <span className="block text-sm font-semibold text-foreground">Baixar ZapLiberal</span>
-            <span className="block text-xs text-foreground/80">Nosso grupo privado · Android</span>
+            <span className="block text-xs text-foreground/80">Nosso grupo privado · Android e iPhone</span>
           </span>
           <Download className="h-5 w-5 shrink-0 text-foreground" aria-hidden="true" />
         </button>
@@ -45,22 +48,27 @@ export function ZapLiberalDownload() {
             <p>Ative as notificações para saber quando seu cadastro for aprovado. Depois da aprovação, o grupo é liberado automaticamente. Sem convite.</p>
           </div>
         </div>
-        <section aria-labelledby="apk-notice-title" className="space-y-3 rounded-xl border border-rose/35 bg-card p-4 text-sm leading-relaxed text-foreground/90">
+        {!isIOS && <section aria-labelledby="apk-notice-title" className="space-y-3 rounded-xl border border-rose/35 bg-card p-4 text-sm leading-relaxed text-foreground/90">
           <h3 id="apk-notice-title" className="font-semibold text-foreground">Antes de instalar: entenda o aviso do Android</h3>
           <p>O ZapLiberal é exclusivo para maiores de 18 anos e não está disponível na Play Store ou na App Store. No Android, baixe o app diretamente aqui pelo navegador. Pode aparecer um alerta por se tratar de um APK baixado fora da loja oficial. Basta instalar normalmente.</p>
-        </section>
-        <a
+        </section>}
+        <a href="/zapliberal/index.html" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-rose/50 px-4 py-3 text-sm font-semibold text-foreground hover:bg-rose/10">
+          Usar no iPhone / app web
+        </a>
+        <p className="text-center text-xs leading-relaxed text-muted-foreground">No iPhone, abra no Safari e adicione à tela inicial. É obrigatório permitir notificações para acessar o grupo.</p>
+        {!isIOS && <a
           href={APK_URL}
           className="bg-button-gradient inline-flex min-h-12 items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold text-white shadow-button-elegant focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose"
         >
           <Download className="h-5 w-5" aria-hidden="true" />
           Baixar app Android
-        </a>
+        </a>}
         <p className="text-center text-xs leading-relaxed text-muted-foreground">
-          Aplicativo independente para Android · Download do APK.
+          Android: arquivo APK · iPhone: app web na tela inicial.
           Se o Instagram não iniciar o download, abra o link no Chrome.
         </p>
       </DialogContent>
     </Dialog>
   );
 }
+
