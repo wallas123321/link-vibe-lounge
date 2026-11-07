@@ -43,7 +43,7 @@ type LinkItem = {
 const links: LinkItem[] = [
   {
     label: "Maringá Hot",
-    sub: "Nossa rede social",
+    sub: "Rede social para pessoas do meio liberal de Maringá e Região",
     href: "https://maringahot.club",
     icon: Heart,
     logo: maringaLogo.url,
