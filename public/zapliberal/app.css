@@ -2,3 +2,5 @@
 button.avatar{padding:0;min-height:0;border:0;overflow:hidden}.silhouette{position:relative;display:block;width:100%;height:100%}.silhouette:before{content:"";position:absolute;border-radius:50%;background:#aaa2a8;width:30%;height:30%;top:20%;left:35%}.silhouette:after{content:"";position:absolute;background:#aaa2a8;width:64%;height:35%;border-radius:50% 50% 0 0;bottom:10%;left:18%}
 button.author{display:inline;padding:0;min-height:0;border:0;border-radius:0;background:transparent;text-align:left;cursor:pointer}.room-card{display:flex;cursor:pointer;gap:14px}.room-card.row>*{flex:initial}.room-card.row>span:last-child{flex:1;min-width:0}.attached{width:220px;min-height:100px;object-fit:cover}
 
+.ticks{font-weight:700;color:var(--muted);white-space:nowrap}.ticks.read{color:#60cbff}#profile-crop{display:block;width:100%;aspect-ratio:1;touch-action:none;border:2px solid #f8d5e5;border-radius:8px;background:#140e12}#crop-zoom{padding:0;accent-color:#d9275b}
+
