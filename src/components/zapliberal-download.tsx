@@ -45,6 +45,13 @@ export function ZapLiberalDownload() {
             <p>Ative as notificações para saber quando seu cadastro for aprovado. Depois da aprovação, o grupo é liberado automaticamente. Sem convite.</p>
           </div>
         </div>
+        <section aria-labelledby="apk-notice-title" className="space-y-3 rounded-xl border border-rose/35 bg-card p-4 text-sm leading-relaxed text-foreground/90">
+          <h3 id="apk-notice-title" className="font-semibold text-foreground">Antes de instalar: entenda o aviso do Android</h3>
+          <p>O ZapLiberal é exclusivo para maiores de 18 anos e é distribuído diretamente por este site, em arquivo APK, fora da Google Play.</p>
+          <p>Ao baixar, o navegador pode exibir <strong>“Este tipo de arquivo pode danificar seu telefone”</strong>. Esse aviso informa sobre o risco de instalar arquivos desse tipo; ele não significa, por si só, que foi detectado um vírus no ZapLiberal.</p>
+          <p>Confira se você iniciou o download por este site e mantenha o Google Play Protect ativado. Se decidir continuar, toque em “Baixar” e siga as instruções do Android para instalar.</p>
+          <p className="font-semibold text-rose">Uso exclusivo para maiores de 18 anos</p>
+        </section>
         <a
           href={APK_URL}
           className="bg-button-gradient inline-flex min-h-12 items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold text-white shadow-button-elegant focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose"
