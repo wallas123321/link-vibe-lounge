@@ -47,7 +47,7 @@ export function ZapLiberalDownload() {
         </div>
         <section aria-labelledby="apk-notice-title" className="space-y-3 rounded-xl border border-rose/35 bg-card p-4 text-sm leading-relaxed text-foreground/90">
           <h3 id="apk-notice-title" className="font-semibold text-foreground">Antes de instalar: entenda o aviso do Android</h3>
-          <p>O ZapLiberal é exclusivo para maiores de 18 anos e não está disponível na Play Store ou na App Store. No Android, baixe o app diretamente aqui pelo navegador. Pode aparecer um alerta por se tratar de um APK baixado fora da loja oficial. Confira a origem do download e, se confiar nela, siga as instruções para instalar.</p>
+          <p>O ZapLiberal é exclusivo para maiores de 18 anos e não está disponível na Play Store ou na App Store. No Android, baixe o app diretamente aqui pelo navegador. Pode aparecer um alerta por se tratar de um APK baixado fora da loja oficial. Basta instalar normalmente.</p>
         </section>
         <a
           href={APK_URL}
