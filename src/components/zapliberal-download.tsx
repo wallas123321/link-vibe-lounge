@@ -47,10 +47,7 @@ export function ZapLiberalDownload() {
         </div>
         <section aria-labelledby="apk-notice-title" className="space-y-3 rounded-xl border border-rose/35 bg-card p-4 text-sm leading-relaxed text-foreground/90">
           <h3 id="apk-notice-title" className="font-semibold text-foreground">Antes de instalar: entenda o aviso do Android</h3>
-          <p>O ZapLiberal é exclusivo para maiores de 18 anos e é distribuído diretamente por este site, em arquivo APK, fora da Google Play.</p>
-          <p>Ao baixar, o navegador pode exibir <strong>“Este tipo de arquivo pode danificar seu telefone”</strong>. Esse aviso informa sobre o risco de instalar arquivos desse tipo; ele não significa, por si só, que foi detectado um vírus no ZapLiberal.</p>
-          <p>Confira se você iniciou o download por este site e mantenha o Google Play Protect ativado. Se decidir continuar, toque em “Baixar” e siga as instruções do Android para instalar.</p>
-          <p className="font-semibold text-rose">Uso exclusivo para maiores de 18 anos</p>
+          <p>O ZapLiberal é exclusivo para maiores de 18 anos e não está disponível na Play Store ou na App Store. No Android, baixe o app diretamente aqui pelo navegador. Pode aparecer um alerta por se tratar de um APK baixado fora da loja oficial. Confira a origem do download e, se confiar nela, siga as instruções para instalar.</p>
         </section>
         <a
           href={APK_URL}
