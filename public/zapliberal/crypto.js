@@ -5,8 +5,9 @@ export const randomKey=()=>encode(crypto.getRandomValues(new Uint8Array(32)));
 const aes=key=>crypto.subtle.importKey('raw',decode(key),'AES-GCM',false,['encrypt','decrypt']);
 export async function seal(text,key,aad){const iv=crypto.getRandomValues(new Uint8Array(12));return {iv:encode(iv),ciphertext:encode(await crypto.subtle.encrypt({name:'AES-GCM',iv,additionalData:enc.encode(aad)},await aes(key),enc.encode(text)))};}
 export async function open(payload,key,aad){return dec.decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:decode(payload.iv),additionalData:enc.encode(aad)},await aes(key),decode(payload.ciphertext)));}
-export async function encryptMessage(room,user,text,key){const id=crypto.randomUUID();return {id,...await seal(JSON.stringify({v:1,text}),key,room+'|'+user+'|'+id)};}
-export async function decryptMessage(room,m,key){return JSON.parse(await open(m,key,room+'|'+m.author+'|'+m.id)).text;}
+export async function encryptMessage(room,user,text,key,extra={},id=crypto.randomUUID()){const body={v:1,text,...(extra.reply?{reply:extra.reply}:{}),...(extra.mentions?.length?{mentions:extra.mentions}:{})},plain=JSON.stringify(body);if(enc.encode(plain).length>16000)throw Error('Mensagem muito longa. Reduza o texto ou as menções.');return {id,...await seal(plain,key,room+'|'+user+'|'+id),...(extra.reply?{replyTo:extra.reply.id}:{}),...(extra.mentions?.length?{mentions:extra.mentions.map(m=>m.userId)}:{})};}
+export async function decryptContent(room,m,key){return JSON.parse(await open(m,key,room+'|'+m.author+'|'+m.id));}
+export async function decryptMessage(room,m,key){return (await decryptContent(room,m,key)).text;}
 export async function identity(){const pair=await crypto.subtle.generateKey({name:'ECDH',namedCurve:'P-256'},true,['deriveBits']);return {public:encode(await crypto.subtle.exportKey('spki',pair.publicKey)),private:encode(await crypto.subtle.exportKey('pkcs8',pair.privateKey))};}
 async function wrapping(privateValue,publicValue,context){const own=await crypto.subtle.importKey('pkcs8',decode(privateValue),{name:'ECDH',namedCurve:'P-256'},false,['deriveBits']),other=await crypto.subtle.importKey('spki',decode(publicValue),{name:'ECDH',namedCurve:'P-256'},false,[]);const secret=new Uint8Array(await crypto.subtle.deriveBits({name:'ECDH',public:other},own,256)),ctx=enc.encode(context),joined=new Uint8Array(secret.length+ctx.length);joined.set(secret);joined.set(ctx,secret.length);return encode(await crypto.subtle.digest('SHA-256',joined));}
 export async function directKey(room,own,peer){return wrapping(own,peer,'ZapLiberal direct key v1|'+room);}
@@ -21,4 +22,3 @@ async function item(mode,key,value){const d=await database();return new Promise(
 async function master(){let key=await item('readonly','master');if(!key){key=await crypto.subtle.generateKey({name:'AES-GCM',length:256},false,['encrypt','decrypt']);await item('readwrite','master',key);}return key;}
 export async function saveAccount(account){const iv=crypto.getRandomValues(new Uint8Array(12)),data=await crypto.subtle.encrypt({name:'AES-GCM',iv},await master(),enc.encode(JSON.stringify(account)));await item('readwrite','account',{iv,data});}
 export async function loadAccount(){const p=await item('readonly','account');return p?JSON.parse(dec.decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:p.iv},await master(),p.data))):null;}
-
