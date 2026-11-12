@@ -26,9 +26,12 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <main className="flex min-h-screen items-center justify-center px-6">
-      <p className="text-center text-sm font-medium uppercase tracking-[0.3em] text-muted-foreground">
+    <main className="flex min-h-screen flex-col items-center justify-center gap-6 px-6 text-center">
+      <p className="text-sm font-medium uppercase tracking-[0.3em] text-muted-foreground">
         Página em manutenção
+      </p>
+      <p className="max-w-xs text-xs uppercase tracking-[0.22em] text-muted-foreground/60">
+        Em breve: loja de roupas para casais
       </p>
     </main>
   );
