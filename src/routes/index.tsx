@@ -1,9 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Heart, Crown } from "lucide-react";
-import { ZapLiberalDownload } from "@/components/zapliberal-download";
 import heroAvatar from "@/assets/casal.jpg";
 
-import maringaLogo from "@/assets/maringa-hot-logo.png.asset.json";
 import privacyLogo from "@/assets/privacy-logo.png.asset.json";
 import { SITE_URL, DEFAULT_TITLE, DEFAULT_DESCRIPTION, SEO_KEYWORDS, SITE_JSONLD } from "@/lib/seo";
 
@@ -41,13 +39,6 @@ type LinkItem = {
 };
 
 const links: LinkItem[] = [
-  {
-    label: "Maringá Hot",
-    sub: "Rede social para pessoas do meio liberal de Maringá e Região",
-    href: "https://maringahot.club",
-    icon: Heart,
-    logo: maringaLogo.url,
-  },
   {
     label: "Assista nossos v1de0s P@rn0+18",
     sub: "Acesso completo",
@@ -99,7 +90,6 @@ function Index() {
         </div>
 
         <nav className="mt-10 flex w-full flex-col gap-3">
-          <ZapLiberalDownload />
           {links.map((l) => {
             const Icon = l.icon;
             const isInternal = !!l.to;
