@@ -8,31 +8,16 @@ import marido from "@/assets/previas/marido.jpg";
 import vid9 from "@/assets/previas/vid9.jpg";
 import foto7 from "@/assets/previas/foto7.jpg";
 import foto9 from "@/assets/previas/foto9.png";
-import { SITE_URL } from "@/lib/seo";
+import { pageHead, SITE_NAME } from "@/lib/seo";
 import { UploadedPhotos } from "@/components/uploaded-photos";
 
 export const Route = createFileRoute("/previas")({
-  head: () => ({
-    meta: [
-      { title: "Prévias e Conteúdo Exclusivo — Casal Liberal de Maringá | Hotwife e Ménage" },
-      {
-        name: "description",
-        content:
-          "Prévias do conteúdo exclusivo do Casal Secrets Maringá. Casal liberal de Maringá-PR: hotwife, ménage e o melhor do meio swing do Paraná.",
-      },
-      {
-        property: "og:title",
-        content: "Prévias e Conteúdo Exclusivo — Casal Liberal de Maringá | Hotwife e Ménage",
-      },
-      {
-        property: "og:description",
-        content:
-          "Prévias do conteúdo exclusivo do Casal Secrets Maringá. Casal liberal de Maringá-PR: hotwife, ménage e o melhor do meio swing do Paraná.",
-      },
-      { property: "og:url", content: `${SITE_URL}/previas` },
-    ],
-    links: [{ rel: "canonical", href: `${SITE_URL}/previas` }],
-  }),
+  head: () =>
+    pageHead(
+      "/previas",
+      `Prévias da galeria | ${SITE_NAME}`,
+      "Veja as prévias das fotos do Casal Secrets Maringá e acesse o conteúdo completo no Privacy. Galeria exclusiva para maiores de 18 anos.",
+    ),
   component: PreviasPage,
 });
 
@@ -71,7 +56,7 @@ function PreviasPage() {
           className="self-start mb-6 flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
         >
           <ArrowLeft className="h-4 w-4" />
-          Voltar
+          Voltar ao perfil do casal
         </Link>
 
         <header className="mb-8 text-center">
@@ -80,7 +65,7 @@ function PreviasPage() {
             <span className="text-foreground">Exclusivos do Casal</span>
           </h1>
           <p className="mt-3 text-sm text-muted-foreground">
-            Clique para assistir
+            Confira as prévias do Casal Secrets Maringá. Selecione uma imagem para acessar o Privacy.
           </p>
         </header>
 
