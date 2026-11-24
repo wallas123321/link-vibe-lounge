@@ -1,6 +1,6 @@
 export const PHOTO_WIDTH = 600;
 export const PHOTO_HEIGHT = 800;
-export const PHOTO_BLUR = 12;
+export const PHOTO_BLUR = 5;
 export const MAX_PHOTO_BYTES = 15 * 1024 * 1024;
 
 export function cropGeometry(width: number, height: number, zoom: number, x: number, y: number) {
@@ -71,13 +71,15 @@ export function drawPhoto(
     PHOTO_WIDTH,
     pad,
   );
-  // A small downsample also guarantees blur in browsers without canvas filters.
-  const tiny = document.createElement("canvas");
-  tiny.width = 40;
-  tiny.height = 53;
-  tiny.getContext("2d")!.drawImage(padded, 0, 0, tiny.width, tiny.height);
+  // Match the existing gallery's 5px filter without a second blur from downsampling.
+  // Keep the full resolution so the exported preview retains the same detail.
+  if (!("filter" in ctx)) {
+    throw new Error(
+      "Este navegador não suporta o filtro de desfoque. Use uma versão atual do Chrome, Edge ou Firefox.",
+    );
+  }
   ctx.filter = `blur(${PHOTO_BLUR}px) brightness(1.1)`;
-  ctx.drawImage(tiny, -pad, -pad, padded.width, padded.height);
+  ctx.drawImage(padded, -pad, -pad);
   ctx.filter = "none";
 }
 
