@@ -105,9 +105,6 @@ function PreviasPage() {
                 <span className="absolute top-1.5 left-1.5 rounded bg-crimson/90 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
                   HD
                 </span>
-                <span className="absolute bottom-1.5 right-1.5 rounded bg-black/60 px-1.5 py-0.5 text-[10px] font-medium uppercase text-white">
-                  Foto
-                </span>
               </div>
 
               <div className="p-2.5">

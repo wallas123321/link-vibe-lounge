@@ -1,4 +1,27 @@
 import { CHECKOUT_URL, staticPhotos } from "@/lib/static-gallery";
+import { Eye } from "lucide-react";
+
+// Additional display blur for the batch uploaded on November 24, 2026.
+const enhancedBlurBatch = new Set([
+  "1795541209147",
+  "1795541240062",
+  "1795541263545",
+  "1795541313531",
+  "1795541331193",
+  "1795541348563",
+  "1795541358126",
+  "1795541367491",
+  "1795541375871",
+  "1795541392335",
+  "1795541406561",
+]);
+
+// Decorative, fictional counts requested for the static gallery; not analytics.
+function displayViews(id: string) {
+  let hash = 0;
+  for (const character of id) hash = (Math.imul(hash, 31) + character.charCodeAt(0)) >>> 0;
+  return `${((52 + (hash % 180)) / 10).toFixed(1)}k`;
+}
 
 export function UploadedPhotos() {
   return staticPhotos.map((photo) => (
@@ -17,19 +40,25 @@ export function UploadedPhotos() {
           width={600}
           height={800}
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          style={
+            enhancedBlurBatch.has(photo.id.split("/").pop()!.split("-")[0])
+              ? { filter: "blur(5px)" }
+              : undefined
+          }
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
         <span className="absolute top-1.5 left-1.5 rounded bg-crimson/90 px-1.5 py-0.5 text-[10px] font-bold uppercase text-white">
           HD
-        </span>
-        <span className="absolute bottom-1.5 right-1.5 rounded bg-black/60 px-1.5 py-0.5 text-[10px] font-medium uppercase text-white">
-          Foto
         </span>
       </div>
       <div className="p-2.5">
         <span className="flex items-center justify-center rounded-lg bg-gradient-to-r from-amber-500 via-orange-500 to-rose-600 px-2 py-2 text-center text-[11px] font-bold uppercase leading-tight tracking-wide text-white shadow-md transition-all group-hover:from-amber-400 group-hover:via-orange-400 group-hover:to-rose-500 group-active:scale-95 sm:px-3 sm:text-xs">
           Acessar conteúdo exclusivo
         </span>
+        <div className="mt-2 flex items-center justify-center gap-1 text-[11px] text-muted-foreground">
+          <Eye className="h-3 w-3" />
+          {displayViews(photo.id)} views
+        </div>
       </div>
     </a>
   ));
