@@ -1,35 +1,7 @@
-import { useEffect, useState } from "react";
-import { CHECKOUT_URL, listPhotos, photoUrl, type GalleryPhoto } from "@/lib/gallery";
+import { CHECKOUT_URL, staticPhotos } from "@/lib/static-gallery";
 
 export function UploadedPhotos() {
-  const [photos, setPhotos] = useState<GalleryPhoto[]>([]);
-  const [failed, setFailed] = useState(false);
-  const [attempt, setAttempt] = useState(0);
-  useEffect(() => {
-    let active = true;
-    setFailed(false);
-    listPhotos()
-      .then((data) => {
-        if (active) setPhotos(data);
-      })
-      .catch(() => {
-        if (active) setFailed(true);
-      });
-    return () => {
-      active = false;
-    };
-  }, [attempt]);
-
-  if (failed)
-    return (
-      <p className="col-span-full text-center text-sm text-muted-foreground" role="status">
-        Não foi possível carregar as novas fotos.{" "}
-        <button className="underline" onClick={() => setAttempt(attempt + 1)}>
-          Tentar novamente
-        </button>
-      </p>
-    );
-  return photos.map((photo) => (
+  return staticPhotos.map((photo) => (
     <a
       key={photo.id}
       href={CHECKOUT_URL}
@@ -39,7 +11,7 @@ export function UploadedPhotos() {
     >
       <div className="relative aspect-[3/4] overflow-hidden bg-muted">
         <img
-          src={photoUrl(photo.storage_path)}
+          src={photo.src}
           alt={photo.title}
           loading="lazy"
           width={600}
