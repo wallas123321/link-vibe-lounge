@@ -2,7 +2,7 @@
 // ⚠️ Quando tiver domínio próprio, troque SITE_URL aqui (uma única vez)
 export const SITE_URL = "https://casalmaringa.com";
 
-export const SITE_NAME = "Casal Novinho Maringá";
+export const SITE_NAME = "Casal Secrets Maringá";
 
 export const SEO_KEYWORDS = [
   "casal maringá",
@@ -22,7 +22,7 @@ export const SEO_KEYWORDS = [
 ].join(", ");
 
 export const DEFAULT_TITLE =
-  "Casal Novinho Maringá — Casal Liberal | Swing, Hotwife e Ménage em Maringá PR";
+  "Casal Secrets Maringá — Casal Liberal | Swing, Hotwife e Ménage em Maringá PR";
 
 export const DEFAULT_DESCRIPTION =
   "Casal liberal de Maringá-PR. Casados, do meio liberal e swing, só saímos juntos. " +

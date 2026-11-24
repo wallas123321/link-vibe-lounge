@@ -62,7 +62,7 @@ function Index() {
         <div className="relative mb-6">
           <div className="absolute inset-0 rounded-full bg-crimson/40 blur-2xl animate-pulse-glow" />
           <div className="relative h-36 w-36 overflow-hidden rounded-full ring-2 ring-crimson/60 ring-offset-4 ring-offset-background shadow-glow">
-            <img src={heroAvatar} alt="Casal Novinho Maringá" className="h-full w-full object-cover" />
+            <img src={heroAvatar} alt="Casal Secrets Maringá" className="h-full w-full object-cover" />
           </div>
         </div>
 
@@ -70,7 +70,7 @@ function Index() {
           CRS 192294
         </div>
         <h1 className="text-center text-4xl font-semibold italic leading-tight">
-          <span className="text-gold-gradient">Casal Novinho</span>
+          <span className="text-gold-gradient">Casal Secrets</span>
           <br />
           <span className="text-foreground">Maringá</span>
         </h1>
@@ -153,7 +153,7 @@ function Index() {
             <Heart className="h-3 w-3 fill-crimson text-crimson" />
           </div>
           <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground/60">
-            © {new Date().getFullYear()} Casal Novinho Maringá
+            © {new Date().getFullYear()} Casal Secrets Maringá
           </p>
         </footer>
       </div>

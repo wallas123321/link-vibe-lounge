@@ -18,7 +18,7 @@ export const Route = createFileRoute("/previas")({
       {
         name: "description",
         content:
-          "Prévias do conteúdo exclusivo do Casal Novinho Maringá. Casal liberal de Maringá-PR: hotwife, ménage e o melhor do meio swing do Paraná.",
+          "Prévias do conteúdo exclusivo do Casal Secrets Maringá. Casal liberal de Maringá-PR: hotwife, ménage e o melhor do meio swing do Paraná.",
       },
       {
         property: "og:title",
@@ -27,7 +27,7 @@ export const Route = createFileRoute("/previas")({
       {
         property: "og:description",
         content:
-          "Prévias do conteúdo exclusivo do Casal Novinho Maringá. Casal liberal de Maringá-PR: hotwife, ménage e o melhor do meio swing do Paraná.",
+          "Prévias do conteúdo exclusivo do Casal Secrets Maringá. Casal liberal de Maringá-PR: hotwife, ménage e o melhor do meio swing do Paraná.",
       },
       { property: "og:url", content: `${SITE_URL}/previas` },
     ],
