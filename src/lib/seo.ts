@@ -1,52 +1,57 @@
+// Configuração central de SEO
+// ⚠️ Quando tiver domínio próprio, troque SITE_URL aqui (uma única vez)
 export const SITE_URL = "https://casalmaringa.com";
+
 export const SITE_NAME = "Casal Secrets Maringá";
 
-export const PROFILE_DESCRIPTION =
-  "Conheça o Casal Secrets Maringá, casal liberal de Maringá (PR). Veja as prévias da galeria e encontre o perfil do casal no Privacy. Para maiores de 18 anos.";
+export const SEO_KEYWORDS = [
+  "casal maringá",
+  "casal de maringá",
+  "casal liberal maringá",
+  "meio liberal maringá",
+  "swing maringá",
+  "swing paraná",
+  "hotwife maringá",
+  "cuckold maringá",
+  "ménage maringá",
+  "menage maringá",
+  "casal swinger maringá",
+  "relacionamento aberto maringá",
+  "vida a dois liberal",
+  "casal liberal paraná",
+].join(", ");
 
-export function pageHead(path: "/" | "/previas", title: string, description: string) {
-  const url = new URL(path, SITE_URL).href;
+export const DEFAULT_TITLE =
+  "Casal Secrets Maringá — Casal Liberal | Swing, Hotwife e Ménage em Maringá PR";
 
-  return {
-    meta: [
-      { title },
-      { name: "description", content: description },
-      { property: "og:title", content: title },
-      { property: "og:description", content: description },
-      { property: "og:url", content: url },
-      { name: "twitter:title", content: title },
-      { name: "twitter:description", content: description },
-    ],
-    links: [{ rel: "canonical", href: url }],
-  };
-}
+export const DEFAULT_DESCRIPTION =
+  "Casal liberal de Maringá-PR. Casados, do meio liberal e swing, só saímos juntos. " +
+  "Conteúdo exclusivo, hotwife, ménage e encontros com casais e solteiros selecionados em Maringá e região.";
 
+// JSON-LD do site (ProfilePage + localização)
 export const SITE_JSONLD = {
   "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebSite",
-      "@id": `${SITE_URL}/#website`,
-      url: `${SITE_URL}/`,
-      name: SITE_NAME,
-      alternateName: "Secrets Maringá",
-      inLanguage: "pt-BR",
-    },
-    {
-      "@type": "ProfilePage",
-      url: `${SITE_URL}/`,
-      name: SITE_NAME,
-      isPartOf: { "@id": `${SITE_URL}/#website` },
-      mainEntity: {
-        "@type": "Organization",
-        name: SITE_NAME,
-        description: PROFILE_DESCRIPTION,
-        location: {
-          "@type": "City",
-          name: "Maringá",
-          containedInPlace: { "@type": "State", name: "Paraná" },
-        },
+  "@type": "ProfilePage",
+  name: SITE_NAME,
+  url: SITE_URL,
+  mainEntity: {
+    "@type": "Organization",
+    name: SITE_NAME,
+    url: SITE_URL,
+    description: DEFAULT_DESCRIPTION,
+    areaServed: {
+      "@type": "City",
+      name: "Maringá",
+      containedInPlace: {
+        "@type": "State",
+        name: "Paraná",
       },
     },
-  ],
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Maringá",
+      addressRegion: "PR",
+      addressCountry: "BR",
+    },
+  },
 };

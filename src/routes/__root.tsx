@@ -12,7 +12,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { SITE_NAME } from "../lib/seo";
+import { SITE_URL, SITE_NAME, DEFAULT_TITLE, DEFAULT_DESCRIPTION, SEO_KEYWORDS } from "../lib/seo";
 
 function NotFoundComponent() {
   return (
@@ -79,15 +79,23 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { title: DEFAULT_TITLE },
+      { name: "description", content: DEFAULT_DESCRIPTION },
+      { name: "keywords", content: SEO_KEYWORDS },
       { name: "author", content: SITE_NAME },
       { name: "robots", content: "index, follow" },
       // Classificação de conteúdo adulto (SafeSearch / RTA)
       { name: "rating", content: "adult" },
       { name: "RATING", content: "RTA-5042-1996-1400-1577-RTA" },
+      { property: "og:title", content: DEFAULT_TITLE },
+      { property: "og:description", content: DEFAULT_DESCRIPTION },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: SITE_NAME },
       { property: "og:locale", content: "pt_BR" },
+      { property: "og:url", content: SITE_URL },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: DEFAULT_TITLE },
+      { name: "twitter:description", content: DEFAULT_DESCRIPTION },
       { name: "geo.region", content: "BR-PR" },
       { name: "geo.placename", content: "Maringá" },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/2febfa8f-eafd-4b95-bf69-e7972ec5294e/id-preview-b1dba3ef--26139ac9-9c9c-4c69-85da-102b4bc0a683.lovable.app-1782321950298.png" },

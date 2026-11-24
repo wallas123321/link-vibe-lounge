@@ -3,11 +3,21 @@ import { Heart, Crown } from "lucide-react";
 import heroAvatar from "@/assets/casal.jpg";
 
 import privacyLogo from "@/assets/privacy-logo.png.asset.json";
-import { pageHead, PROFILE_DESCRIPTION, SITE_JSONLD, SITE_NAME } from "@/lib/seo";
+import { SITE_URL, DEFAULT_TITLE, DEFAULT_DESCRIPTION, SEO_KEYWORDS, SITE_JSONLD } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
   head: () => ({
-    ...pageHead("/", `${SITE_NAME} | Casal liberal em Maringá (PR)`, PROFILE_DESCRIPTION),
+    meta: [
+      { title: DEFAULT_TITLE },
+      { name: "description", content: DEFAULT_DESCRIPTION },
+      { name: "keywords", content: SEO_KEYWORDS },
+      { property: "og:title", content: DEFAULT_TITLE },
+      { property: "og:description", content: DEFAULT_DESCRIPTION },
+      { property: "og:url", content: SITE_URL },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [{ rel: "canonical", href: SITE_URL }],
     scripts: [
       {
         type: "application/ld+json",
@@ -30,8 +40,8 @@ type LinkItem = {
 
 const links: LinkItem[] = [
   {
-    label: "Ver prévias do casal",
-    sub: "Galeria para maiores de 18 anos",
+    label: "Assista nossos v1de0s P@rn0+18",
+    sub: "Acesso completo",
     to: "/previas",
     icon: Crown,
     logo: privacyLogo.url,
@@ -65,7 +75,7 @@ function Index() {
           <span className="text-foreground">Maringá</span>
         </h1>
         <p className="mt-4 text-center text-sm leading-relaxed text-muted-foreground max-w-xs">
-          Somos um casal de Maringá, no Paraná. Somos casados, vivemos o meio liberal e só saímos juntos.
+          Casados, liberais, só saímos juntos. Confira nossos conteúdos exclusivos no botão abaixo.
         </p>
 
         <div className="mt-4 flex flex-wrap justify-center gap-2">
@@ -90,7 +100,7 @@ function Index() {
               <>
                 <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/95 backdrop-blur-sm p-1.5 ${l.featured ? "" : "text-crimson"}`}>
                   {l.logo ? (
-                    <img src={l.logo} alt="" className="h-full w-full object-contain" />
+                    <img src={l.logo} alt={l.label} className="h-full w-full object-contain" />
                   ) : (
                     <Icon className={`h-5 w-5 ${l.featured ? "text-foreground" : ""}`} />
                   )}
@@ -129,18 +139,11 @@ function Index() {
           <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
             Casal Liberal em Maringá — PR
           </h2>
-          <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-            Aqui reunimos as prévias das nossas fotos. O conteúdo completo fica no nosso perfil no Privacy.
+          <p className="mt-3 text-[11px] leading-relaxed text-muted-foreground/70">
+            Somos um casal de Maringá do meio liberal. Produzimos conteúdo exclusivo.
+            Relacionamento aberto, ménage, hotwife. Casal de Maringá, Casal Maringá, Secrets Maringá, Secrets Club Maringá
+            consentimento.
           </p>
-          <details className="mt-4 text-xs leading-relaxed text-muted-foreground">
-            <summary className="cursor-pointer font-medium text-foreground">
-              O Secrets Maringá faz reservas para festas?
-            </summary>
-            <p className="mt-2">
-              Este é o perfil do casal. Para reservar uma mesa em uma casa de swing
-              ou consultar a programação de uma balada liberal em Maringá, fale diretamente com o local.
-            </p>
-          </details>
         </section>
 
         <footer className="mt-8 flex flex-col items-center gap-2 text-center">
