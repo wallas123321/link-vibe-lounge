@@ -2,10 +2,10 @@ import { Fragment } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Heart, Crown } from "lucide-react";
 import { ZapLiberalDownload } from "@/components/zapliberal-download";
-import heroAvatar from "@/assets/casal.jpg";
+import heroAvatar from "@/assets/casal-avatar.jpg";
 
-import maringaLogo from "@/assets/maringa-hot-logo.png.asset.json";
-import privacyLogo from "@/assets/privacy-logo.png.asset.json";
+import maringaLogo from "@/assets/maringa-hot-icon.png";
+import privacyLogo from "@/assets/privacy-icon.png";
 import { SITE_URL, DEFAULT_TITLE, DEFAULT_DESCRIPTION, SEO_KEYWORDS, SITE_JSONLD } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
@@ -47,7 +47,7 @@ const links: LinkItem[] = [
     sub: "Acesso completo",
     to: "/previas",
     icon: Crown,
-    logo: privacyLogo.url,
+    logo: privacyLogo,
     featured: true,
   },
   {
@@ -55,7 +55,7 @@ const links: LinkItem[] = [
     sub: "Rede social para pessoas do meio liberal de Maringá e Região",
     href: "https://maringahot.club",
     icon: Heart,
-    logo: maringaLogo.url,
+    logo: maringaLogo,
   },
 ];
 
@@ -72,7 +72,7 @@ function Index() {
         <div className="relative mb-6">
           <div className="absolute inset-0 rounded-full bg-crimson/40 blur-2xl animate-pulse-glow" />
           <div className="relative h-36 w-36 overflow-hidden rounded-full ring-2 ring-crimson/60 ring-offset-4 ring-offset-background shadow-glow">
-            <img src={heroAvatar} alt="Casal Secrets Maringá" className="h-full w-full object-cover" />
+            <img src={heroAvatar} alt="Casal Secrets Maringá" width={144} height={144} fetchPriority="high" className="h-full w-full object-cover" />
           </div>
         </div>
 
@@ -110,7 +110,7 @@ function Index() {
               <>
                 <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/95 backdrop-blur-sm p-1.5 ${l.featured ? "" : "text-crimson"}`}>
                   {l.logo ? (
-                    <img src={l.logo} alt={l.label} className="h-full w-full object-contain" />
+                    <img src={l.logo} alt="" width={44} height={44} decoding="async" className="h-full w-full object-contain" />
                   ) : (
                     <Icon className={`h-5 w-5 ${l.featured ? "text-foreground" : ""}`} />
                   )}
