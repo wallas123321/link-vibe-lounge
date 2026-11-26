@@ -85,7 +85,7 @@ function Index() {
           <span className="text-foreground">Maringá</span>
         </h1>
         <p className="mt-4 text-center text-sm leading-relaxed text-muted-foreground max-w-xs">
-          Casados, liberais, só saímos juntos. Confira nossos conteúdos exclusivos no botão abaixo.
+          Casados, liberais. Confira nossos conteúdos exclusivos no botão abaixo.
         </p>
 
         <div className="mt-4 flex flex-wrap justify-center gap-2">
