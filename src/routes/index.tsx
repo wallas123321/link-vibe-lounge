@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Heart, Crown } from "lucide-react";
 import { ZapLiberalDownload } from "@/components/zapliberal-download";
@@ -42,19 +43,19 @@ type LinkItem = {
 
 const links: LinkItem[] = [
   {
-    label: "Maringá Hot",
-    sub: "Rede social para pessoas do meio liberal de Maringá e Região",
-    href: "https://maringahot.club",
-    icon: Heart,
-    logo: maringaLogo.url,
-  },
-  {
     label: "Assista nossos v1de0s P@rn0+18",
     sub: "Acesso completo",
     to: "/previas",
     icon: Crown,
     logo: privacyLogo.url,
     featured: true,
+  },
+  {
+    label: "Maringá Hot",
+    sub: "Rede social para pessoas do meio liberal de Maringá e Região",
+    href: "https://maringahot.club",
+    icon: Heart,
+    logo: maringaLogo.url,
   },
 ];
 
@@ -99,8 +100,7 @@ function Index() {
         </div>
 
         <nav className="mt-10 flex w-full flex-col gap-3">
-          <ZapLiberalDownload />
-          {links.map((l) => {
+          {links.map((l, index) => {
             const Icon = l.icon;
             const isInternal = !!l.to;
             const Wrapper = isInternal ? Link : "a";
@@ -134,13 +134,15 @@ function Index() {
             );
 
             return (
+              <Fragment key={l.label}>
+              {index === 1 && <ZapLiberalDownload />}
               <Wrapper
-                key={l.label}
                 {...wrapperProps}
                 className="bg-button-gradient group relative flex items-center gap-4 overflow-hidden rounded-2xl px-5 py-4 shadow-button-elegant transition-all hover:scale-[1.02] hover:shadow-glow"
               >
                 {content}
               </Wrapper>
+              </Fragment>
             );
           })}
         </nav>
